@@ -6,7 +6,7 @@ function App() {
   const [total, setTotal] = useState('')
   const [numOne, setNumOne] = useState('')
   const [numTwo, setNumTwo] = useState('')
-  const [operator, setOperator] = useState("")
+  const [operator, setOperator] = useState('')
 
   const clearState = () => {
     setNumOne('')
@@ -16,7 +16,12 @@ function App() {
   }
 
   const setOpState = (op) => {
-    if (operator === "") {
+    if (operator != "" && total != "") {
+      setOperator(op.value)
+      setNumOne(total)
+      setNumTwo('')
+      setTotal('')
+    } else if (operator === "") {
       setOperator(op.value)
     } else if (op.value === "=") {
       console.log("====")
@@ -30,7 +35,7 @@ function App() {
     ) 
     console.log("total", total)
   }
-//making changes
+
   const setNumState = (num) => {
     if (operator === "") {
       if (numOne) {
