@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-// import {numbers, operators} from "./data"
+import {numbers, operators} from "./data"
 
 function App() {
   const [total, setTotal] = useState('')
@@ -17,13 +17,13 @@ function App() {
 
   const setOpState = (op) => {
     if (operator !== "" && total !== "") {
-      setOperator(op)
+      setOperator(op.value)
       setNumOne(total)
       setNumTwo('')
       setTotal('')
     } else if (operator === "") {
-      setOperator(op)
-    } else if (op === "=") {
+      setOperator(op.value)
+    } else if (op.value === "=") {
       console.log("====")
       showTotal()
     } 
@@ -67,58 +67,12 @@ function App() {
               {numTwo}
               {total ? <div> = {total} </div> : <div></div>}
             </div>
-
+ 
             <div className="buttons">
               <button onClick={() => {clearState()}}>
                 C
               </button>
-              <button onClick={() => {setOpState("/")}}>
-                /
-              </button>
-              <button onClick={() => {setNumState("7")}}>
-                7
-              </button>
-              <button onClick={() => {setNumState("8")}}>
-                8
-              </button>
-              <button onClick={() => {setNumState("9")}}>
-                9
-              </button>
-              <button onClick={() => {setOpState("*")}}>
-                x
-              </button>
-              <button onClick={() => {setNumState("4")}}>
-                4
-              </button>
-              <button onClick={() => {setNumState("5")}}>
-                5
-              </button>
-              <button onClick={() => {setNumState("6")}}>
-                6
-              </button>
-              <button onClick={() => {setOpState("-")}}>
-                -
-              </button>
-              <button onClick={() => {setNumState("1")}}>
-                1
-              </button>
-              <button onClick={() => {setNumState("2")}}>
-                2
-              </button>
-              <button onClick={() => {setNumState("3")}}>
-                3
-              </button>
-              <button onClick={() => {setOpState("+")}}>
-                +
-              </button>
-              <button onClick={() => {setNumState("0")}}>
-                0
-              </button>
-              <button onClick={() => {setOpState("=")}}>
-                =
-              </button>
-
-              {/* {numbers.map((number) => { 
+              {numbers.map((number) => { 
                 return (
                 <button key={number} onClick={() => {setNumState(number)}}>
                   {number}
@@ -131,7 +85,7 @@ function App() {
                   {operator.char}
                 </button>
                 )
-              })} */}
+              })}
             </div>
 
           </div>
