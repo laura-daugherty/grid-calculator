@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
-import {numbers, operators} from "./data"
+// import {numbers, operators} from "./data"
 
 function App() {
   const [total, setTotal] = useState('')
   const [numOne, setNumOne] = useState('')
   const [numTwo, setNumTwo] = useState('')
-  const [operator, setOperator] = useState("")
+  const [operator, setOperator] = useState('')
 
   const clearState = () => {
     setNumOne('')
@@ -16,12 +16,17 @@ function App() {
   }
 
   const setOpState = (op) => {
-    if (operator === "") {
-      setOperator(op.value)
-    } else if (op.value === "=") {
+    if (operator !== "" && total !== "") {
+      setOperator(op)
+      setNumOne(total)
+      setNumTwo('')
+      setTotal('')
+    } else if (operator === "") {
+      setOperator(op)
+    } else if (op === "=") {
       console.log("====")
       showTotal()
-    }
+    } 
   }
 
   const showTotal = () => {
@@ -30,7 +35,7 @@ function App() {
     ) 
     console.log("total", total)
   }
-//making changes
+
   const setNumState = (num) => {
     if (operator === "") {
       if (numOne) {
@@ -49,32 +54,89 @@ function App() {
 
   return (
       <div className="App">
-        <header className="App-header">
-          CSS Grid Calculator
-        </header>
-        <div>
-          {numOne}
-          {operator}
-          {numTwo}
-          {total ? <div> = {total} </div> : <div></div>}
-          <button onClick={() => {clearState()}}>
-            C
-          </button>
-          {numbers.map((number) => { 
-            return (
-            <button onClick={() => {setNumState(number)}}>
-              {number}
-            </button>
-            )
-          })}
-          {operators.map((operator) => { 
-            return (
-            <button onClick={() => {setOpState(operator)}}>
-              {operator.char}
-            </button>
-            )
-          })}
+        <div className="wrapper">
+
+          <header className="App-header">
+            CSS Grid Calculator
+          </header>
+          <div className="mainbox">
+
+            <div className="display">
+              {numOne}
+              {operator}
+              {numTwo}
+              {total ? <div> = {total} </div> : <div></div>}
+            </div>
+
+            <div className="buttons">
+              <button onClick={() => {clearState()}}>
+                C
+              </button>
+              <button onClick={() => {setOpState("/")}}>
+                /
+              </button>
+              <button onClick={() => {setNumState("7")}}>
+                7
+              </button>
+              <button onClick={() => {setNumState("8")}}>
+                8
+              </button>
+              <button onClick={() => {setNumState("9")}}>
+                9
+              </button>
+              <button onClick={() => {setOpState("*")}}>
+                x
+              </button>
+              <button onClick={() => {setNumState("4")}}>
+                4
+              </button>
+              <button onClick={() => {setNumState("5")}}>
+                5
+              </button>
+              <button onClick={() => {setNumState("6")}}>
+                6
+              </button>
+              <button onClick={() => {setOpState("-")}}>
+                -
+              </button>
+              <button onClick={() => {setNumState("1")}}>
+                1
+              </button>
+              <button onClick={() => {setNumState("2")}}>
+                2
+              </button>
+              <button onClick={() => {setNumState("3")}}>
+                3
+              </button>
+              <button onClick={() => {setOpState("+")}}>
+                +
+              </button>
+              <button onClick={() => {setNumState("0")}}>
+                0
+              </button>
+              <button onClick={() => {setOpState("=")}}>
+                =
+              </button>
+
+              {/* {numbers.map((number) => { 
+                return (
+                <button key={number} onClick={() => {setNumState(number)}}>
+                  {number}
+                </button>
+                )
+              })}
+              {operators.map((operator) => { 
+                return (
+                <button key={operator.char} onClick={() => {setOpState(operator)}}>
+                  {operator.char}
+                </button>
+                )
+              })} */}
+            </div>
+
+          </div>
         </div>
+
       </div>
   );
 }
